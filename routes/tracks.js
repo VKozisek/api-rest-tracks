@@ -20,23 +20,35 @@ const checkRol = require("../middleware/rol");
 /**
  * Lista los items
  */
-router.get("/", getItems);
+router.get("/", authMiddleware, getItems);
 /**
  * Obtener detalle de item
  */
-router.get("/:id", validatorGetItem, getItem);
+router.get("/:id", authMiddleware, validatorGetItem, getItem);
 /**
  * Crea un registro
  */
-router.post("/", validatorCreateItem, createItems);
+router.post(
+  "/",
+  authMiddleware,
+  checkRol(["admin"]),
+  validatorCreateItem,
+  createItems
+);
 /**
  * ACtualiza un registro
  */
-router.put("/:id", validatorGetItem, validatorCreateItem, updateItems);
+router.put(
+  "/:id",
+  authMiddleware,
+  validatorGetItem,
+  validatorCreateItem,
+  updateItems
+);
 
 /**
  * Eliminar un registro
  */
-router.delete("/:id", validatorGetItem, deleteItems);
+router.delete("/:id", authMiddleware, validatorGetItem, deleteItems);
 
 module.exports = router;

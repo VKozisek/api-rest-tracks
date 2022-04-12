@@ -12,19 +12,20 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const token = req.headers.authorization.split(" ").pop(); //TODO Bearer {{token}}
-
     const dataToken = await verifyToken(token);
 
-    if (!dataToken) {
-      handleHttpError(res, "NOT PAYLOAD DATA", 401);
+    if (!dataToken._id) {
+      handleHttpError(res, "ERROR_ID_TOKEN", 401);
       return;
     }
 
-    const query = {
+    const user = await userModel.findById(dataToken._id);
+
+    /* const query = {
       [propertiesKey.id]: dataToken[propertiesKey.id],
     };
 
-    const user = await userModel.findOne(query);
+    const user = await userModel.findOne(query);*/
 
     req.user = user;
 

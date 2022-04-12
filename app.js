@@ -13,6 +13,7 @@ app.use(express.static("storage"));
 
 morganBody(app, {
   noColors: true,
+  prettify: true,
   stream: loggerStream,
   skip: function (req, res) {
     return res.statusCode < 400; //TODO 2xx, 3xx
