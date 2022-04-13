@@ -25,6 +25,6 @@ const User = sequelize.define(
     timestamps: true,
   }
 );
-User.find = User.findAll;
-User.findById = User.findByPk;
+/* User.find = User.findAll;
+User.findById = User.findByPk; */
 module.exports = User;

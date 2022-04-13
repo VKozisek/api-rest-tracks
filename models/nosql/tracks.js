@@ -45,6 +45,22 @@ const TracksScheme = new mongoose.Schema(
     versionKey: false,
   }
 );
+/**
+ * Implementar metodo propio con relacion a storage
+ */
+TracksScheme.statics.findAllData = function (name) {
+  const joinData = this.aggregate([
+    {
+      $lookup: {
+        from: "storages",
+        localField: "mediaId",
+        foreignField: "_id",
+        as: "audio",
+      },
+    },
+  ]);
+  return joinData;
+};
 
 TracksScheme.plugin(mongooseDelete, { overrideMethods: "all" });
 

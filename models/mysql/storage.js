@@ -17,7 +17,7 @@ const Storage = sequelize.define(
   }
 );
 
-Storage.find = Storage.findAll;
-Storage.findById = Storage.findByPk;
+/* Storage.find = Storage.findAll;
+Storage.findById = Storage.findByPk; */
 
 module.exports = Storage;
